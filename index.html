@@ -1,0 +1,78 @@
+<html>
+  <head>
+      <title>Simulação</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <link rel="shortcut icon" href="images/compiler-icon.png" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/custom.css">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  </head>
+  <body class="mx-auto" >
+      <header>
+        <div>
+          <h1 class="h1">Compiladores</h1>
+        </div>
+      </header>
+      <body>
+        <main>
+          <section id="filas">
+            <div class="card card-custom">
+              <h5 class="card-header">Dados &nbsp;&nbsp;&nbsp;&nbsp;<img class="icon-image" src="images/computer.png"></h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="chegadas-fila">Sentença</label>
+                    <input type="text" class="form-control" id="chegadas-fila" placeholder="" value="" min="0">
+                  </div>
+                  <div class="col-md-4 mb-3 button-custom">
+                    <button type="button" id="calcular-fila" class="btn btn-outline-success">Gerar sentença</button>
+                  </div>
+                  <div class="col-md-4 mb-3 button-gramatica">
+                    <button type="button" id="show-gramatica" class="btn btn-outline-warning">Visualizar gramática</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card card-custom resultado-fila">
+              <h5 class="card-header">Resultado &nbsp;&nbsp;&nbsp;&nbsp;<img class="icon-image" src="images/table.png"></h5>
+              <div class="card-body table-responsive-sm" id='resultado-fila'>
+              </div>
+            </div>
+          </section>
+          <!-- Modal -->
+          <div class="modal fade" id="gramaticaModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Gramática</h5>
+                  <button type="button" class="btn-close fechar-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn fechar-modal btn-secondary" data-bs-dismiss="modal">fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="toast" role="alert" id="toast-actions" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+              Ações
+              <div class="mt-2 pt-2 border-top">
+                <button type="button" class="btn btn-outline-primary">Executar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="toast">Executar próximo passo</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      <footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="js/custom.js"></script>
+      </footer>
+  </body>
+</html

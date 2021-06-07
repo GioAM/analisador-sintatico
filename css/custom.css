@@ -1,0 +1,21 @@
+body{
+	font-family: 'Roboto', sans-serif;
+	width: 1200px;
+}
+.button-custom{
+	width: 160px;
+	margin-top: 24px;
+}
+.button-gramatica{
+	width: 200px;
+	margin-top: 24px;
+}
+.card-custom{
+	margin-bottom: 30px;
+}
+#toast-actions{
+	position: absolute;
+    left: 30px;
+    bottom: 30px;
+    opacity: 1;
+}
