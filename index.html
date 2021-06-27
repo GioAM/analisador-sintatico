@@ -1,6 +1,6 @@
 <html>
   <head>
-      <title>Simulação</title>
+      <title>Compiladores</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <link rel="shortcut icon" href="images/compiler-icon.png" />
@@ -12,7 +12,7 @@
   <body class="mx-auto" >
       <header>
         <div>
-          <h1 class="h1">Compiladores</h1>
+          <h1 class="h1">Analisador Sintático Top-Down</h1>
         </div>
       </header>
       <body>
@@ -24,10 +24,10 @@
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label for="chegadas-fila">Sentença</label>
-                    <input type="text" class="form-control" id="chegadas-fila" placeholder="" value="" min="0">
+                    <input type="text" class="form-control" id="sentenca" placeholder="" value="abbc">
                   </div>
                   <div class="col-md-4 mb-3 button-custom">
-                    <button type="button" id="calcular-fila" class="btn btn-outline-success">Gerar sentença</button>
+                    <button type="button" id="gerar-sentenca" class="btn btn-outline-success">Gerar sentença</button>
                   </div>
                   <div class="col-md-4 mb-3 button-gramatica">
                     <button type="button" id="show-gramatica" class="btn btn-outline-warning">Visualizar gramática</button>
@@ -37,7 +37,7 @@
             </div>
             <div class="card card-custom resultado-fila">
               <h5 class="card-header">Resultado &nbsp;&nbsp;&nbsp;&nbsp;<img class="icon-image" src="images/table.png"></h5>
-              <div class="card-body table-responsive-sm" id='resultado-fila'>
+              <div class="card-body table-responsive-sm" id='resultado'>
               </div>
             </div>
           </section>
@@ -46,11 +46,87 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Gramática</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Informações da Gramática</h5>
                   <button type="button" class="btn-close fechar-modal" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  ...
+                  <h5>Gramática:</h5>
+                  <div class="modal-gramatica">
+                    <p>S::= aAc | bCa</p>
+                    <p>A::= bCb | aBa | cSb</p>
+                    <p>B::= cS | bAa</p>
+                    <p>C::= cSc | ε</p>
+                  </div>
+                  <h5>Conjuntos:</h5>
+                  <table class="table table-bordered modal-conjuntos">
+                    <thead>
+                      <tr>
+                        <th scope="col">FIRST</th>
+                        <th scope="col">FOLLOW</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>S = a, b</td>
+                        <td>S = $, a, b, c</td>
+                      </tr>
+                      <tr>
+                        <td>A = a, c</td>
+                        <td>A = a, b, c</td>
+                      </tr>
+                      <tr>
+                        <td>B = b, c</td>
+                        <td>B = a</td>
+                        
+                      </tr>
+                      <tr>
+                        <td>C = c, ε</td>
+                        <td>C = a, b</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <h5>Tabela Parsing:</h5>
+                  <table class="table table-bordered modal-parsing">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">a</th>
+                        <th scope="col">b</th>
+                        <th scope="col">c</th>
+                        <th scope="col">$</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">S</th>
+                        <td>S → aAc</td>
+                        <td>S → bCa</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">A</th>
+                        <td>A → aBa</td>
+                        <td>A → bCb</td>
+                        <td>A → cSb</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">B</th>
+                        <td>-</td>
+                        <td>B → bAa</td>
+                        <td>B → cS</td>
+                        <td>-</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">C</th>
+                        <td>C → ε</td>
+                        <td>C → ε</td>
+                        <td>C → cSc</td>
+                        <td>-</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn fechar-modal btn-secondary" data-bs-dismiss="modal">fechar</button>
@@ -58,21 +134,30 @@
               </div>
             </div>
           </div>
+          <div class="toast position-absolute" role="alert" id="attention-toast" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+              Processo já finalizado! Para iniciar um novo processo mude a sentença ou clique no botão abaixo.
+              <div class="mt-2 pt-2 border-top">
+                <button type="button" class="btn btn-primary btn-sm" id="toast-reset">Reiniciar processo</button>
+              </div>
+            </div>
+          </div>
           <div class="toast" role="alert" id="toast-actions" aria-live="assertive" aria-atomic="true">
             <div class="toast-body">
               Ações
               <div class="mt-2 pt-2 border-top">
-                <button type="button" class="btn btn-outline-primary">Executar</button>
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="toast">Executar próximo passo</button>
+                <button type="button" class="btn btn-outline-primary" id="doAllSteps">Executar</button>
+                <button type="button" class="btn btn-outline-secondary" id="doNextStep">Executar próximo passo</button>
               </div>
             </div>
           </div>
         </main>
       <footer>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="js/custom.js"></script>
+        <script src="js/parsing.js"></script>
       </footer>
   </body>
 </html
