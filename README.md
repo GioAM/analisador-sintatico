@@ -1,10 +1,10 @@
 # Analisador Sintático Top-Down Preditivo Tabular
 
-Aplicação mostrando o funcionamento de um Analisador Sintático Top-Down Preditivo Tabular através de uma gramática proposta.
+Aplicação mostrando o funcionamento de um Analisador Sintático Top-Down Preditivo Tabular através de uma gramática proposta. Trabalho desenvolvido na matéria de Compiladores.
 
 -------------------- 
 
-- **Demo:** https://gioam.github.io/mapeamento-de-tarefas/
+- **Demo:** https://gioam.github.io/analisador-sintatico/
 
 --------------------
 ## Entrada
